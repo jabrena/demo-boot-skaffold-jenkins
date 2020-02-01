@@ -1,0 +1,51 @@
+plugins {
+	id 'com.google.cloud.tools.jib' version '1.8.0'
+	id 'org.springframework.boot' version '2.2.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.boot.skaffold'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+jib {
+	to {
+		image = 'roynilanjan1/demo-boot-skaffold-jenkins'
+		auth {
+
+			username = System.getenv("DOCKER_USR")
+			password = System.getenv("DOCKER_PWD")
+
+		}
+	}
+	container {
+		useCurrentTimestamp = true
+		ports = ['8080', '5005']
+		jvmFlags = [
+				'-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005'
+		]
+	}
+}
+
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+
+test {
+	useJUnitPlatform()
+}

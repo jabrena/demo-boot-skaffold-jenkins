@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-boot-skaffold-jenkins
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-boot-skaffold-jenkins
+  template:
+    metadata:
+      labels:
+        app: demo-boot-skaffold-jenkins
+    spec:
+      containers:
+        - name: demo-boot-skaffold-jenkins-pod
+          image: roynilanjan1/demo-boot-skaffold-jenkins
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-boot-skaffold-jenkins-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: demo-boot-skaffold-jenkins
