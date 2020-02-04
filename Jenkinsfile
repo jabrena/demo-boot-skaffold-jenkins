@@ -16,7 +16,7 @@ pipeline {
 
                     sh '/usr/local/bin/pks login -a api.pks.nilanjan.in -u $USERNAME -p $PASSWORD -k'
                     sh '/usr/local/bin/pks get-credentials pks-workshop'
-                    sh '/usr/local/bin/sudo skaffold run'
+                    sh 'sudo /usr/local/bin/skaffold run'
                 }
             }
 
