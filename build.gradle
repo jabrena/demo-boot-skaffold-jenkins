@@ -17,12 +17,7 @@ repositories {
 jib {
 	to {
 		image = 'roynilanjan1/demo-boot-skaffold-jenkins'
-		auth {
 
-			username = System.getenv("DOCKER_USR")
-			password = System.getenv("DOCKER_PWD")
-
-		}
 	}
 	container {
 		useCurrentTimestamp = true
