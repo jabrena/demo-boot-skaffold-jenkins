@@ -3,7 +3,7 @@ kind: Config
 # Enforce SKaffold to use Jib
 build:
   local:
-    push: true
+    push: false
   # Generated artifact
   artifacts:
     - image: roynilanjan1/demo-boot-skaffold-jenkins
